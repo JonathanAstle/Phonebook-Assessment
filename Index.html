@@ -44,6 +44,10 @@
 
                         <form th:action="@{/submit}" th:object="${contact}" method="post">
                             <div class="form-group">
+                                <!-- <label for="id" class="col-form-label">id:</label> -->
+                                <input type="hidden" th:field="*{id}" class="form-control" id="id">
+                            </div>
+                            <div class="form-group">
                                 <label for="firstName" class="col-form-label">Name:</label>
                                 <input type="text" th:field="*{firstName}" class="form-control" id="firstName">
                             </div>
@@ -70,7 +74,7 @@
         <br>
         <!-- Edit post -->
         <div class="myForm">
-            <form th:action="@{/submit}" th:object="${subscriber}" method="post">
+            <form th:action="@{/submit}" th:object="${contact}" method="post">
                 <div class="modal fade bd-edit-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="editModal">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -82,7 +86,7 @@
                             </div>
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <!--<label for="title" class="col-form-label">ID:</label>-->
+                                    <label for="title" class="col-form-label">ID:</label>
                                     <input type="hidden" th:field="*{id}" class="form-control" name="idEdit" id="idEdit" readonly/>
                                 </div>
                                 <div class="form-group">
@@ -90,7 +94,7 @@
                                     <input type="text" th:field="*{firstName}" class="form-control" name="firstNameEdit" id="firstNameEdit" value="" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="address" class="col-form-label">Message:</label>
+                                    <label for="address" class="col-form-label">Address:</label>
                                     <textarea th:field="*{address}" class="form-control" name="addressEdit" id="addressEdit" value=""></textarea>
                                 </div>
                                 <div class="form-group">
@@ -109,7 +113,7 @@
             </form>
         </div>
 
-        <!-- Search feature-->
+        <!-- Search feature -->
         <div class="modal fade bd-search-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -121,17 +125,17 @@
                     </div>
                     <div class="modal-body">
 
-                        <form th:action="@{/findOne/{firstName}(firstName=${cont.firstName})}" th:object="${contact}" method="post">
+                        <form th:action="@{/findOne/{firstName}(firstName=${contact.firstName})}" th:object="${contact}" method="post">
                             <div class="form-group">
                                 <label for="firstName" class="col-form-label">Name:</label>
                                 <input type="text" th:field="*{firstName}" class="form-control" id="firstName">
                             </div>
 
-
                             <div class="modal-footer">
+                              
                                 <button id="search-contact-close" type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
-                                <!-- Button to create post -->
                                 <button id="search-contact-search" type="submit" class="btn btn-outline-success">Search</button>
+
                             </div>
                         </form>
                     </div>
@@ -139,21 +143,20 @@
             </div>
         </div>
 
-
-
         <br>
         <div class="table">
             <div class="col-md-12">
-                <div th:each="cont : ${contact}" class="toast fade show">
+                <div th:each="cont : ${contacts}" class="toast fade show">
                     <div class="toast-header">
-                        <strong th:text="${cont.first}" class="mr-auto"></strong>
+                        <strong th:text="${cont.firstName}" class="mr-auto"></strong>
                         <!-- <small class="text-muted">Just now</small> -->
-                        <a id="edit-contact-btn" th:href="@{/findOne/{id}(id=${cont.id})}" class="ml-2 mb-1 close fa fa-edit eBtn" data-toggle="modal" data-target=".bd-edit-modal-lg">Edit</a>
+                        <a id="edit-contact-btn" th:href="@{/edit/{id}(id=${cont.id})}" class="ml-2 mb-1 close fa fa-edit eBtn" data-toggle="modal" data-target=".bd-edit-modal-lg">Edit</a>
                         <form th:action="@{/delete/{id}(id=${cont.id})}" method="GET">
-                            <button id="delete-contact-btn"type="submit" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
+                            <button id="delete-contact-btn" type="submit" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
                         </form>
                     </div>
-                    <div th:text="${cont.message}" class="toast-body"></div>
+
+                    <div th:text="${cont.address}" class="toast-body"></div>
                     <div th:text="${cont.phoneNumber}" class="toast-body"></div>
                 </div>
             </div>
@@ -170,11 +173,11 @@
             $('.table .eBtn').on('click', function(event) {
                 event.preventDefault();
                 var href = $(this).attr('href');
-                $.get(href, function(contact, status) {
-                    $('.myForm #idEdit').val(contact.id);
-                    $('.myForm #firstNameEdit').val(contact.firstName);
-                    $('.myForm #addressEdit').val(contact.address);
-                    $('.myForm #phoneNumberEdit').val(contact.phoneNumber);
+                $.get(href, function(users, status) {
+                    $('.myForm #idEdit').val(users.id);
+                    $('.myForm #firstNameEdit').val(users.firstName);
+                    $('.myForm #addressEdit').val(users.address);
+                    $('.myForm #phoneNumberEdit').val(users.phoneNumber);
                 });
             });
         });

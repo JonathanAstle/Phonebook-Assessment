@@ -6,10 +6,6 @@
 </head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
-
-
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 <body>
@@ -30,10 +26,11 @@
     <br>
 
     <div class="container">
+
+        <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target=".bd-create-modal-lg">Create Contact</button>
+        <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target=".bd-search-modal-lg">Search Contact</button>
+
         <!-- Large modal to create post -->
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bd-create-modal-lg">Create Contact</button>
-        <button class="ui inverted blue basic button">Basic Blue</button>
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bd-create-modal-lg">Create Contact</button>
         <div class="modal fade bd-create-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -78,7 +75,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="editModalLabel">Edit Post</h5>
+                                <h5 class="modal-title" id="editModalLabel">Edit Contact</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -111,6 +108,39 @@
                 </div>
             </form>
         </div>
+
+        <!-- Search feature-->
+        <div class="modal fade bd-search-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="searchModalLabel">Search Contact</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form th:action="@{/submit}" th:object="${contact}" method="post">
+                            <div class="form-group">
+                                <label for="firstName" class="col-form-label">Name:</label>
+                                <input type="text" th:field="*{firstName}" class="form-control" id="firstName">
+                            </div>
+
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                <!-- Button to create post -->
+                                <button type="submit" class="btn btn-success">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
         <br>
         <div class="table">
             <div class="col-md-12">
@@ -134,8 +164,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="semantic/dist/semantic.min.js"></script>
 
     <script>
         $(document).ready(function() {

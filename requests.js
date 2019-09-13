@@ -33,7 +33,7 @@ function postOnLoad() {
         if (req.status == 201 || req.status == 200) {
             console.log("req.status was: " + req.status);
             console.log("POST Request successful");
-            makeGetRequest("http://localhost:9000/ratings", "ratings");
+            makeGetRequest();
         } else {
             console.log("req.status was: " + req.status);
             console.log("POST Request failed");
@@ -54,7 +54,7 @@ function deleteOnLoad() {
         if (req.status == 201 || req.status == 200) {
             console.log("req.status was: " + req.status)
             console.log("DELETE Request successful")
-            makeGetRequest("http://localhost:9000/ratings", "ratings");
+            makeGetRequest();
         } else {
             console.log("req.status was: " + req.status);
             console.log("DELETE Request failed");
@@ -76,7 +76,7 @@ function putOnLoad() {
         if (req.status == 201 || req.status == 200) {
             console.log("req.status was: " + req.status);
             console.log("PUT Request successful");
-            makeGetRequest("http://localhost:9000/ratings", "ratings");
+            makeGetRequest();
         } else {
             console.log("req.status was: " + req.status);
             console.log("PUT Request failed");

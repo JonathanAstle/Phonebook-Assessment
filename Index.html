@@ -121,7 +121,7 @@
                     </div>
                     <div class="modal-body">
 
-                        <form th:action="@{/submit}" th:object="${contact}" method="post">
+                        <form th:action="@{/findOne/{id}(id=${cont.id})}" th:object="${contact}" method="post">
                             <div class="form-group">
                                 <label for="firstName" class="col-form-label">Name:</label>
                                 <input type="text" th:field="*{firstName}" class="form-control" id="firstName">
